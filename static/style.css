@@ -1,0 +1,15 @@
+.list-group{
+  max-height: 250px;
+  margin-bottom: 20px;
+  overflow:scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0px 15px;
+  margin-bottom: -1px;
+  border: 1px solid #ddd;
+  line-height: 1.2em
+}
