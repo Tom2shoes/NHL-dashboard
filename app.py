@@ -16,6 +16,22 @@ mongo = PyMongo(app)
 #            })
 #     return jsonify(stats)
 
+@app.route("/")
+def landing_page():
+    away_data = []
+
+    data = mongo.db.BOXSCORES.find({'away_team':'Anaheim Ducks'}, {'_id': False})
+
+    for stat in data:
+        away_data.append({
+            "Away Goals": stat["away_goals"],
+            "Away Shots": stat["away_shots"],
+            "Away Penalty Minutes": stat["away_pim"],
+            "Away Takeaways": stat["away_takeaway"],
+            "Away Giveaways": stat["away_giveaway"]
+        })
+    return jsonify(away_data)
+
 @app.route("/away/<team>")
 def away_page(team):
     away_data = []
