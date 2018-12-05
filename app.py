@@ -8,10 +8,13 @@ mongo = PyMongo(app)
 
 # @app.route("/")
 # def home_page():
-#     team_stats = mongo.db.STATS.find_one()
-#     return render_template("index.html",
-#         team_stats=team_stats,
-#         teams_array=teams_array)
+#     stats = []
+#     team_stats = mongo.db.STATS.find_one() #{'_id': False}
+#     for stat in team_stats:
+#       stats.append({
+#       "Something You Choose" : stat["column_"]     
+#            })
+#     return jsonify(stats)
 
 @app.route("/away/<team>")
 def away_page(team):
@@ -33,7 +36,7 @@ def away_page(team):
 @app.route("/home/<team>")
 def home_page(team):
     home_data = []
-    
+
     #data = mongo.db.BOXSCORES.find({'home_team':'Anaheim Ducks'}, {'_id': False})
     data = mongo.db.BOXSCORES.find({'home_team': team}, {'_id': False})
 
