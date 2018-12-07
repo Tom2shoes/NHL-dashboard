@@ -18,14 +18,19 @@ def team_stats_data():
         #team_stats = list(mongo.db.STATS.find({}, {'_id': False}))
         return jsonify(list(stats_df.columns)[2:])
 
-@app.route("/stat.faceOffWinPercentage")
-def faceOffWinPercentage():
-        return jsonify(list(stats_df.loc[:, 'stat.faceOffWinPercentage']))
+@app.route("/test")
+def test():
+        df_to_json = {
+                "team_name": stats_df['team.name'].values.tolist(),
+                "wins": stats_df['stat.wins'].values.tolist(),
+                "losses": stats_df['stat.losses'].values.tolist(),
+                "games_played": stats_df['stat.gamesPlayed'].values.tolist(),
+                "fo_win_pct": stats_df['stat.faceOffWinPercentage'].values.tolist(),
+                "win_outshoot_pct": (stats_df['stat.winOutshootOpp'].values * 100).tolist(),
+                "win_scorefirst_pct": (stats_df['stat.winScoreFirst'].values * 100).tolist()     
+                }
 
-        
-@app.route("/teamname")
-def teamName():
-        return jsonify(list(stats_df.loc[:, 'team.name']))
+        return jsonify(df_to_json)
 
 if __name__ == "__main__":
     app.run(debug=True)
