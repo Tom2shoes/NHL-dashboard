@@ -5,7 +5,7 @@ import json
 from stats_pull_store import *
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/nhl-database"
+app.config["MONGO_URI"] = "mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp"
 mongo = PyMongo(app)
 
 @app.route("/")
