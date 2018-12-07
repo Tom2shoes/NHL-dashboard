@@ -1,6 +1,5 @@
 from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
-# from stats_pull_store import *
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/nhl-database"
@@ -18,19 +17,7 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def landing_page():
-    away_data = []
-
-    data = mongo.db.BOXSCORES.find({'away_team':'Anaheim Ducks'}, {'_id': False})
-
-    for stat in data:
-        away_data.append({
-            "Away Goals": stat["away_goals"],
-            "Away Shots": stat["away_shots"],
-            "Away Penalty Minutes": stat["away_pim"],
-            "Away Takeaways": stat["away_takeaway"],
-            "Away Giveaways": stat["away_giveaway"]
-        })
-    return jsonify(away_data)
+    return render_template("index.html")
 
 @app.route("/away/<team>")
 def away_page(team):

@@ -11,12 +11,25 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   </head>
 
-  <body>
-
-      <div class="panel panel-primary col-md-auto" id="result_panel">
-            <div class="panel-heading"><h3 class="panel-title">Team Selection</h3></div>
+  <!-- <body background="https://www.desktopbackground.org/p/2011/02/28/164734_nhl-logo-ice-hockey-wallpaper-jpg_3840x2400_h.jpg"> -->
+    <body>
+        <a class="row">
+        <div class="title-menu col-md-8">0 NHL DASHBOARD</div>
             
-            <div class="panel-body">
+        
+    </div>
+        </a>
+
+      <div class="panel panel-primary col-sm-auto col-md-auto" id="result_panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    TEAM SELECTION
+                </h3>
+            </div>
+
+        
+            
+            <div class="panel-body>
                     <ul class="list-group">
                         {% for team in teams_array %}
                             <li class="list-group-item list-group-item-action">{{team}}</li>
