@@ -3,6 +3,7 @@ from flask_pymongo import PyMongo
 import pandas as pd
 import json
 from .stats_pull_store import *
+import .NHL_Twitter_Sentiments
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp"
@@ -59,6 +60,22 @@ def home_page(team):
             "Home Giveaways": stat["home_giveaway"]
         })
     return jsonify(home_data)
+
+@app.route('/twitter')
+def index():
+    TWITTER = mongo.db.TWITTER.find_one()
+    return render_template('index.html', TWITTER=TWITTER)
+
+@app.route('/twitter/scrape')
+def scrape():
+    TWITTER = mongo.db.TWITTER
+    TWITTER_data_scrape = NHL_Twitter_Sentiments.scrape()
+    TWITTER.update(
+        {},
+        TWITTER_data_scrape,
+        upsert=True
+    )
+    return redirect("Twitter Scraping Successful!!")
 
 if __name__ == "__main__":
     app.run(debug=True)
