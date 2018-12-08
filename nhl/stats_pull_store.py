@@ -1,14 +1,12 @@
 # Dependencies
 import requests
-import json
-import pprint
 import pandas as pd
 
 from pandas.io.json import json_normalize
 from pymongo import MongoClient
 
 # MongoDB connection
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp')
 db = client['nhl-database']
 collection = db['STATS']
 
@@ -26,7 +24,7 @@ for team in team_ids:
     
     query_url = f"https://statsapi.web.nhl.com/api/v1/teams/{team}/stats"
     team_stats = requests.get(query_url).json()
-    collection.insert_one(team_stats)
+    collection.insert(team_stats)
 
 # Unparsed DataFrame of nested team stats
 nested_stats = pd.DataFrame(list(collection.find({})))
@@ -39,15 +37,3 @@ for i in range(len(team_ids)):
 
 # clean & workable parent dataframe 
 stats_df = json_normalize(pre_df_list)
-stats_json = stats_df.to_json(orient='records')
-
-# Formatting into arrays for Plotly.js
-teams_array = stats_df['team.name'].values
-# games_played_array = stats_df['stat.gamesPlayed'].values
-# wins_array = stats_df['stat.wins'].values
-# losses_array = stats_df['stat.losses'].values
-# fo_win_array = stats_df['stat.faceOffWinPercentage'].values
-# gpg_array = stats_df['stat.goalsPerGame'].values
-# gapg_array = stats_df['stat.goalsAgainstPerGame'].values
-# win_outshootpct_array = stats_df['stat.winOutshootOpp'].values
-# win_scorefirstpct_array = stats_df['stat.winScoreFirst'].values
