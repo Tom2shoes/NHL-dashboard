@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 import pandas as pd
 import json
 from .stats_pull_store import *
-import .NHL_Twitter_Sentiments
+from .NHL_Twitter_Sentiments import *
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp"
