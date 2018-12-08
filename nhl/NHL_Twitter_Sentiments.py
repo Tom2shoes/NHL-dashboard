@@ -4,7 +4,7 @@ import numpy as np
 
 from datetime import datetime
 from pymongo import MongoClient
-from config import consumer_key, consumer_secret, access_token, access_token_secret
+from .config import consumer_key, consumer_secret, access_token, access_token_secret
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
 
