@@ -9,7 +9,7 @@ app.config["MONGO_URI"] = "mongodb://nhldashboard:password1@ds215370.mlab.com:15
 mongo = PyMongo(app)
 
 @app.route("/")
-def home_page():
+def landing_page():
     return render_template("index.html")
 
 @app.route("/test")
