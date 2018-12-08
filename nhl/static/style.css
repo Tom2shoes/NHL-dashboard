@@ -1,7 +1,12 @@
+@font-face {
+  font-family: nhlFont;
+  src: url("../static/NHL.ttf");
+}
+
 .list-group{
   max-height: 250px;
   margin-bottom: 20px;
-  overflow:scroll;
+  overflow: scroll;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -12,4 +17,39 @@
   margin-bottom: -1px;
   border: 1px solid #ddd;
   line-height: 1.2em
+}
+
+.panel-title {
+  font-family: nhlFont;
+  color: silver;
+}
+
+.title-menu{
+  font-family: nhlFont;
+  color: black;
+  background-color: silver;
+  font-size: 80px;
+}
+
+.title-menu-link{
+  font-family: nhlFont;
+  color: red;
+  background-color: silver;
+  font-size: 20px;
+  text-align: middle;
+}
+
+/* panel-body {
+  opacity: 0.5;
+} */
+
+body {
+  background: url("../static/Images/nhl-bg2.jpg");
+  background-color: black;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+}
+
+.svg-container {
+  opacity: 0.95;
 }
