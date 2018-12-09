@@ -1,3 +1,5 @@
+https://nhl-dashboard-app.herokuapp.com/
+
 NHL exploration dashboard
 
 Group: Sherry, Julie, Josh, Tommy
