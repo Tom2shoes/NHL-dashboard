@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
 import pandas as pd
 import json
-from .stats_pull_store import *
+from stats_pull_store import *
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp"
@@ -26,29 +26,50 @@ def test():
 
         return jsonify(df_to_json)
     
-@app.route("/away/<team>")
+@app.route("/latestgame/<team>")
 def away_page(team):
-    away_data = []
+    
+    game_data = []
 
     #data = mongo.db.BOXSCORES.find({'away_team':'Anaheim Ducks'}, {'_id': False})
-    data = mongo.db.BOXSCORES.find({'away_team': team}, {'_id': False})
+    data = mongo.db.BOXSCORES.find({
+        "$or":[
+            {'away_team':team},
+            {'home_team':team}
+        ],
+        'home_shots': {"$gt": 0}, 
+        'away_shots': {"$gt": 0 }
+        }).sort([('game_id', -1)]).limit(1)
 
     for stat in data:
-        away_data.append({
-            "Away Goals": stat["away_goals"],
-            "Away Shots": stat["away_shots"],
-            "Away Penalty Minutes": stat["away_pim"],
-            "Away Takeaways": stat["away_takeaway"],
-            "Away Giveaways": stat["away_giveaway"]
-        })
-    return jsonify(away_data)
+        game_data = {
+        "game id" : stat["game_id"],
+        "Home Goals" : stat["home_goals"],
+        "Home Shots" : stat["home_shots"],
+        "Home Penalty Minutes" : stat["home_pim"],
+        "Home Takeaways" : stat["home_takeaway"],
+        "Home Team" : stat["home_team"],
+        "Home Giveaways" : stat["home_giveaway"],
+        "Away Team" :stat["away_team"],
+        "Away Goals" : stat["away_goals"],
+        "Away Shots" : stat["away_shots"],
+        "Away Penalty Minutes" : stat["away_pim"],
+        "Away Takeaways" : stat["away_takeaway"],
+        "Away Giveaways" : stat["away_giveaway"]
+        }
+
+    if game_data["Home Shots"] == 0:
+        return ("Game not yet played")
+
+    return jsonify(game_data)
+
 
 @app.route("/home/<team>")
 def home_page(team):
     home_data = []
 
     #data = mongo.db.BOXSCORES.find({'home_team':'Anaheim Ducks'}, {'_id': False})
-    data = mongo.db.BOXSCORES.find({'home_team': team}, {'_id': False})
+    data = mongo.db.BOXSCORES.find({'home_team': team})
 
     for stat in data:
         home_data.append({
