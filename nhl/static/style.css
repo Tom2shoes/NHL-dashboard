@@ -48,8 +48,16 @@ body {
   background-color: black;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
+  margin-top: 50px;
 }
 
-.svg-container {
+/* .svg-container {
   opacity: 0.95;
-}
+} */
+
+/* #svg-area {
+  height: auto;
+  width: auto;
+  font-family: 'Times New Roman', Times, serif;
+  margin: auto;
+} */
