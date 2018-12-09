@@ -6,8 +6,12 @@ from pandas.io.json import json_normalize
 from pymongo import MongoClient
 
 # MongoDB connection
-client = MongoClient('mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp')
-db = client['heroku_5gkg84qp']
+#client = MongoClient('mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp')
+client = MongoClient('localhost', 27017)
+
+#db = client['heroku_5gkg84qp']
+db = client['nhl-database']
+
 collection = db['STATS']
 
 # Endpoint with team ID's

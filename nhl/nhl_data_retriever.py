@@ -29,6 +29,8 @@ db = client['nhl-database']
 
 url = "https://statsapi.web.nhl.com/api/v1/game/"
 
+
+collection = db['BOXSCORES']
 collection.drop()
 collection = db['BOXSCORES']
 

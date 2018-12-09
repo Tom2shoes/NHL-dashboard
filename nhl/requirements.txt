@@ -7,5 +7,5 @@ pymongo==3.7
 Flask-PyMongo==2.2
 requests==2.2
 tweepy==3.7.0
-numpy==1.15
+numpy==1.14.3
 vaderSentiment==2.5

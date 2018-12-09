@@ -56,7 +56,7 @@ for hockey_team in hockey_teams:
                                "Neutral": neg,
                                "Text": tweet["text"],
                                "Tweets Ago": team_counter}
-            collection.insert_one(hockey_sentiments)
+            collection.update(hockey_sentiments, {upsert:true})
             # hockey team counter,
             team_counter += 1
 
