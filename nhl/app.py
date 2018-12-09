@@ -71,7 +71,7 @@ def home_page(team):
 @app.route('/twitter')
 def index():
     TWITTER = mongo.db.TWITTER.find_one()
-    return render_template('index.html', TWITTER=TWITTER)
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
