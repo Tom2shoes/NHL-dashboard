@@ -1,6 +1,6 @@
 // let selectedTeams = []
 // choiceTable = d3.selectAll('.list-group-item.list-group-item-action');
-  
+
 // choiceTable
 //   .on('click', function() {
 //     d3.select(this)
@@ -29,73 +29,68 @@ d3.json("/test").then(function(d) {
   goalsPerGameRank.push(d['goalsPerGame'])
   shootingPctRank.push(d['shootingPctRank'])
   winsRank.push(d['wins'])
-  
-}).then(function() {
-  for (i = 0; i < 31; i++) {
-    radarDataset.push(
-      {
-      "label": teamList[0][i],
-      "fill": true,
-      "backgroundColor": random_rgba(i),
-      "borderColor": random_rgba(i),
-      "pointBorderColor": random_rgba(i),
-      "pointBackgroundColor": random_rgba(i),
-      "hidden": true,
-      "data": [ptsRank[0][i], faceOffWin[0][i], goalsPerGameRank[0][i], shootingPctRank[0][i], winsRank[0][i], ]
-    })};
 
-}).then(new Chart(document.getElementById("radar-chart"), {
+  }).then(function() {
+    for (i = 0; i < 31; i++) {
+      radarDataset.push(
+        {
+        "label": teamList[0][i],
+        "fill": true,
+        "backgroundColor": random_rgba(i),
+        "borderColor": random_rgba(i),
+        "pointBorderColor": random_rgba(i),
+        "pointBackgroundColor": random_rgba(i),
+        "hidden": true,
+        "data": [ptsRank[0][i], faceOffWin[0][i], goalsPerGameRank[0][i], shootingPctRank[0][i], winsRank[0][i], ]
+        })};
 
-  type: 'radar',
-  data: {
-    labels: [
-      "Points Rank", 
-      "Face off Win Rank", 
-      "Goals Per Game Rank", 
-      "Shooting Percentage Rank", 
-      "Wins Rank"
-    ],
-    datasets: radarDataset
-  },
+    }).then(new Chart(document.getElementById("radar-chart"), {
 
-  options: {
-
-    legend: {
-      position: 'top',
-      labels: {
-        fontColor: 'white',
-        fontSize: 30
-      }
-
-    },
-    title: {
-      display: true,
-      text: 'NHL Team Statistics',
-      fontColor: 'white'
-    },
-
-    scale: {
-
-      ticks: {
-        reverse: true,
-        beginAtZero: true,
-        suggestedMin: 31,
-        suggestedMax: 31,
-        stepSize: 1
+      type: 'radar',
+      data: {
+        labels: [
+          "Points Rank",
+          "Face off Win Rank",
+          "Goals Per Game Rank",
+          "Shooting Percentage Rank",
+          "Wins Rank"
+        ],
+        datasets: radarDataset
       },
-      pointLabels: {
-        fontColor: 'white'
-      },
-      angleLines: {
-        color: 'white'
-      },
-      gridLines: {
-        color: 'white'
-      },
-    }
 
-  }
-}));
+      options: {
 
+        legend: {
+          position: 'top',
+          labels: {
+            fontColor: 'white',
+            fontSize: 14
+          }
+        },
 
+        title: {
+          display: true,
+          text: 'NHL Team Statistics',
+          fontColor: 'white'
+        },
 
+        scale: {
+          ticks: {
+            reverse: true,
+            beginAtZero: false,
+            suggestedMin: 1,
+            suggestedMax: 31,
+            stepSize: 4
+            },
+          pointLabels: {
+            fontColor: 'white'
+            },
+          angleLines: {
+            color: 'white'
+            },
+          gridLines: {
+            color: 'white'
+            },
+          }
+        }  
+      }));
