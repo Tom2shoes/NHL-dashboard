@@ -2,12 +2,20 @@ from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
 import pandas as pd
 import json
+
+# Remote
 from .stats_pull_store import *
 from .NHL_Twitter_Sentiments import *
-
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp"
 mongo = PyMongo(app)
+
+# # Local
+# from stats_pull_store import *
+# from NHL_Twitter_Sentiments import *
+# app = Flask(__name__)
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/nhl-database"
+# mongo = PyMongo(app)
 
 @app.route("/")
 def landing_page():
