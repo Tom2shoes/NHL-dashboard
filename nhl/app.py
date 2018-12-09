@@ -16,17 +16,23 @@ def landing_page():
 
 @app.route("/test")
 def test():
-        df_to_json = {
-                "team_name": stats_df['team.name'].values.tolist(),
-                "wins": stats_df['stat.wins'].values.tolist(),
-                "losses": stats_df['stat.losses'].values.tolist(),
-                "games_played": stats_df['stat.gamesPlayed'].values.tolist(),
-                "fo_win_pct": stats_df['stat.faceOffWinPercentage'].values.tolist(),
-                "win_outshoot_pct": (stats_df['stat.winOutshootOpp'].values * 100).tolist(),
-                "win_scorefirst_pct": (stats_df['stat.winScoreFirst'].values * 100).tolist()     
-                }
+    
+    rank_df['stat.pts'] = pd.to_numeric(rank_df['stat.pts'])
+    rank_df['stat.faceOffWinPercentage'] = pd.to_numeric(rank_df['stat.faceOffWinPercentage'])
+    rank_df['stat.goalsPerGame'] = pd.to_numeric(rank_df['stat.goalsPerGame'])
+    rank_df['stat.shootingPctRank'] = pd.to_numeric(rank_df['stat.shootingPctRank'])
+    rank_df['stat.wins'] = pd.to_numeric(rank_df['stat.wins'])
 
-        return jsonify(df_to_json)
+    df_to_json = {
+            "teamName": rank_df['team.name'].values.tolist(),
+            "pts": rank_df['stat.pts'].values.tolist(),
+            "faceOffWinPercentage": rank_df['stat.faceOffWinPercentage'].values.tolist(),
+            "goalsPerGame": rank_df['stat.goalsPerGame'].values.tolist(),
+            "shootingPctRank": rank_df['stat.shootingPctRank'].values.tolist(),
+            "wins": rank_df['stat.wins'].values.tolist()
+            }
+
+    return jsonify(df_to_json)
     
 @app.route("/away/<team>")
 def away_page(team):

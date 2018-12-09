@@ -6,13 +6,14 @@ from pandas.io.json import json_normalize
 from pymongo import MongoClient
 
 # MongoDB connection
-#client = MongoClient('mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp')
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp')
+db = client['heroku_5gkg84qp']
+collection = db['RANK']
 
-#db = client['heroku_5gkg84qp']
-db = client['nhl-database']
-
-collection = db['STATS']
+# # Local MongoDB
+# client = MongoClient('localhost', 27017)
+# db = client['nhl-database']
+# collection = db['RANK']
 
 # Endpoint with team ID's
 teams_response = requests.get('https://statsapi.web.nhl.com/api/v1/teams').json()
@@ -37,7 +38,9 @@ pre_df_list = []
 
 for i in range(len(team_ids)):
     # Reaches into nested team stats to pull relevant info & append to 
-    pre_df_list.append((nested_stats.stats[i][0]['splits'][0]))
+    pre_df_list.append((nested_stats.stats[i][1]['splits'][0]))
 
 # clean & workable parent dataframe 
 stats_df = json_normalize(pre_df_list)
+stats_df.iloc[:,:28] = stats_df.iloc[:,:28].replace('\w\w$', '', regex=True)
+rank_df = stats_df
