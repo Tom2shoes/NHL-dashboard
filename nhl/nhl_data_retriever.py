@@ -22,8 +22,6 @@ for y in range(len(game_ids["dates"])):
         #print(game_id)
         all_game_ids.append(game_id)
 
-
-
 client = MongoClient('localhost', 27017)
 db = client['nhl-database']
 
@@ -31,6 +29,9 @@ db = client['nhl-database']
 
 url = "https://statsapi.web.nhl.com/api/v1/game/"
 
+
+collection = db['BOXSCORES']
+collection.drop()
 collection = db['BOXSCORES']
 
 for game in all_game_ids:
@@ -55,7 +56,7 @@ for game in all_game_ids:
         game_data['away_takeaway'] = game_info["liveData"]["boxscore"]["teams"]["away"]["teamStats"]["teamSkaterStats"]["takeaways"]
         game_data['away_giveaway'] = game_info["liveData"]["boxscore"]["teams"]["away"]["teamStats"]["teamSkaterStats"]["giveaways"]
               
-        collection.insert(game_data)  
+        collection.insert(game_data)
         
         print(f"Collecting data for {game}.")
         print("------------------------------")
@@ -66,37 +67,37 @@ for game in all_game_ids:
         print("Moving onto next game...")
         print("------------------------------")
 
-goals = db.BOXSCORES.find().sort("goals", -1)
-for p in goals:
-    print(p["goals"])
+# goals = db.BOXSCORES.find().sort("goals", -1)
+# for p in goals:
+#     print(p["goals"])
     
-PPG = db.BOXSCORES.find().sort("powerPlayGoals", -1)
+# PPG = db.BOXSCORES.find().sort("powerPlayGoals", -1)
 
-for p in PPG:
-    pp.pprint(p["powerPlayGoals"])
+# for p in PPG:
+#     pp.pprint(p["powerPlayGoals"])
     
-shots = db.BOXSCORES.find().sort("shots", -1)
+# shots = db.BOXSCORES.find().sort("shots", -1)
 
-for p in shots:
-    pp.pprint(p["shots"])
+# for p in shots:
+#     pp.pprint(p["shots"])
     
-blocks = db.BOXSCORES.find().sort("blocked", -1)
+# blocks = db.BOXSCORES.find().sort("blocked", -1)
 
-for p in blocks:
-    pp.pprint(p["blocked"])
+# for p in blocks:
+#     pp.pprint(p["blocked"])
     
-takeaways = db.BOXSCORES.find().sort("takeaways", -1)
+# takeaways = db.BOXSCORES.find().sort("takeaways", -1)
 
-for p in takeaways:
-    pp.pprint(p["takeaways"])
+# for p in takeaways:
+#     pp.pprint(p["takeaways"])
     
-giveaways = db.BOXSCORES.find().sort("giveaways", -1)
+# giveaways = db.BOXSCORES.find().sort("giveaways", -1)
 
-for p in giveaways:
-    pp.pprint(p["giveaways"])
+# for p in giveaways:
+#     pp.pprint(p["giveaways"])
     
-pim = db.BOXSCORES.find().sort("pim", -1)
+# pim = db.BOXSCORES.find().sort("pim", -1)
 
-for p in pim:
-    pp.pprint(p["pim"])
+# for p in pim:
+#     pp.pprint(p["pim"])
 

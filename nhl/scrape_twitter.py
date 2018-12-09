@@ -13,7 +13,7 @@ from pymongo import MongoClient
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
 
-from config import consumer_key, consumer_secret, access_token, access_token_secret
+from .config import consumer_key, consumer_secret, access_token, access_token_secret
 
 # Setup Tweepy API Authentication
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -21,8 +21,10 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 
 # Setup Mongo Database
-client = MongoClient('localhost', 27017)
-db = client['nhl-database']
+#client = MongoClient('localhost', 27017)
+#db = client['nhl-database']
+client = MongoClient('mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp')
+db = client['heroku_5gkg84qp']
 collection = db['TWITTER']
 collection.drop()
 

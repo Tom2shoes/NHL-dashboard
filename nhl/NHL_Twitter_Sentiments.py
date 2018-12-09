@@ -14,8 +14,10 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 
 # Setup Mongo Database
-client = MongoClient('localhost', 27017)
-db = client['nhl-database']
+#client = MongoClient('localhost', 27017)
+#db = client['nhl-database']
+client = MongoClient('mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp')
+db = client['heroku_5gkg84qp']
 collection = db['TWITTER']
 
 # Pull 100 Tweets sent out by the following NHL Teams
@@ -56,7 +58,7 @@ for hockey_team in hockey_teams:
                                "Neutral": neg,
                                "Text": tweet["text"],
                                "Tweets Ago": team_counter}
-            collection.insert_one(hockey_sentiments)
+            collection.insert(hockey_sentiments)
             # hockey team counter,
             team_counter += 1
 
