@@ -2,8 +2,8 @@ from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
 import pandas as pd
 import json
-from stats_pull_store import *
-#from .NHL_Twitter_Sentiments import *
+from .stats_pull_store import *
+from .NHL_Twitter_Sentiments import *
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp"
@@ -15,6 +15,7 @@ def landing_page():
 
 @app.route("/test")
 def test():
+    
     rank_df['stat.pts'] = pd.to_numeric(rank_df['stat.pts'])
     rank_df['stat.faceOffWinPercentage'] = pd.to_numeric(rank_df['stat.faceOffWinPercentage'])
     rank_df['stat.goalsPerGame'] = pd.to_numeric(rank_df['stat.goalsPerGame'])
@@ -28,12 +29,6 @@ def test():
             "goalsPerGame": rank_df['stat.goalsPerGame'].values.tolist(),
             "shootingPctRank": rank_df['stat.shootingPctRank'].values.tolist(),
             "wins": rank_df['stat.wins'].values.tolist()
-            # "wins": stats_df['stat.wins'].values.tolist(),
-            # "losses": stats_df['stat.losses'].values.tolist(),
-            # "games_played": stats_df['stat.gamesPlayed'].values.tolist(),
-            # "fo_win_pct": stats_df['stat.faceOffWinPercentage'].values.tolist(),
-            # "win_outshoot_pct": (stats_df['stat.winOutshootOpp'].values * 100).tolist(),
-            # "win_scorefirst_pct": (stats_df['stat.winScoreFirst'].values * 100).tolist()     
             }
 
     return jsonify(df_to_json)

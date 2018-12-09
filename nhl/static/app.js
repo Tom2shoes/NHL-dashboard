@@ -20,7 +20,6 @@ let shootingPctRank = []
 let winsRank = []
 let ptsRank = []
 let goalsPerGameRank = []
-//let winScoreFirstPct = []
 let radarDataset = []
 
 d3.json("/test").then(function(d) {
@@ -31,7 +30,6 @@ d3.json("/test").then(function(d) {
   shootingPctRank.push(d['shootingPctRank'])
   winsRank.push(d['wins'])
   
-  //winScoreFirstPct.push(d['win_scorefirst_pct'])
 }).then(function() {
   for (i = 0; i < 31; i++) {
     radarDataset.push(
