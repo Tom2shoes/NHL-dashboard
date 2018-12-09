@@ -10,28 +10,26 @@
 //   });
 
 function random_rgba() {
-  let o = Math.round, r = Math.random, s = 255;
-  return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+  let o = Math.round, r = Math.random, s = 205;
+  return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + 0.5 + ')';
 }
 
-let faceOffWin = []
 let teamList = []
-let gamesPlayed = []
-let wins = []
-let losses = []
-let goalsPerGame = []
-let winOutshootPct = []
-let winScoreFirstPct = []
+let faceOffWin = []
+let shootingPctRank = []
+let winsRank = []
+let ptsRank = []
+let goalsPerGameRank = []
 let radarDataset = []
 
 d3.json("/test").then(function(d) {
-  faceOffWin.push(d['fo_win_pct'])
-  teamList.push(d['team_name'])
-  gamesPlayed.push(d['games_played'])
-  losses.push(d['losses'])
-  wins.push(d['wins'])
-  winOutshootPct.push(d['win_outshoot_pct'])
-  winScoreFirstPct.push(d['win_scorefirst_pct'])
+  teamList.push(d['teamName'])
+  ptsRank.push(d['pts'])
+  faceOffWin.push(d['faceOffWinPercentage'])
+  goalsPerGameRank.push(d['goalsPerGame'])
+  shootingPctRank.push(d['shootingPctRank'])
+  winsRank.push(d['wins'])
+  
 }).then(function() {
   for (i = 0; i < 31; i++) {
     radarDataset.push(
@@ -43,7 +41,7 @@ d3.json("/test").then(function(d) {
       "pointBorderColor": random_rgba(i),
       "pointBackgroundColor": random_rgba(i),
       "hidden": true,
-      "data": [faceOffWin[0][i], gamesPlayed[0][i], losses[0][i], wins[0][i], winOutshootPct[0][i]]
+      "data": [ptsRank[0][i], faceOffWin[0][i], goalsPerGameRank[0][i], shootingPctRank[0][i], winsRank[0][i], ]
     })};
 
 }).then(new Chart(document.getElementById("radar-chart"), {
@@ -51,19 +49,51 @@ d3.json("/test").then(function(d) {
   type: 'radar',
   data: {
     labels: [
-      "Face Off Win Percentage", 
-      "Goals Against Per Game", 
-      "Goals Per Game", 
-      "Save Percentage", 
-      "Shooting"
+      "Points Rank", 
+      "Face off Win Rank", 
+      "Goals Per Game Rank", 
+      "Shooting Percentage Rank", 
+      "Wins Rank"
     ],
     datasets: radarDataset
   },
+
   options: {
+
+    legend: {
+      position: 'top',
+      labels: {
+        fontColor: 'white',
+        fontSize: 30
+      }
+
+    },
     title: {
       display: true,
-      text: 'NHL Team Statistics'
+      text: 'NHL Team Statistics',
+      fontColor: 'white'
+    },
+
+    scale: {
+
+      ticks: {
+        reverse: true,
+        beginAtZero: true,
+        suggestedMin: 31,
+        suggestedMax: 31,
+        stepSize: 1
+      },
+      pointLabels: {
+        fontColor: 'white'
+      },
+      angleLines: {
+        color: 'white'
+      },
+      gridLines: {
+        color: 'white'
+      },
     }
+
   }
 }));
 
