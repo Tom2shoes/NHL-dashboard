@@ -53,3 +53,7 @@ body {
 .svg-container {
   opacity: 0.95;
 }
+
+#radar-chart {
+  background-color: rgba(143, 103, 95, 0.7)
+}
