@@ -13,7 +13,7 @@ from pymongo import MongoClient
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
 
-from config import consumer_key, consumer_secret, access_token, access_token_secret
+from .config import consumer_key, consumer_secret, access_token, access_token_secret
 
 # Setup Tweepy API Authentication
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
