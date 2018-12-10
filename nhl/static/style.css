@@ -44,8 +44,8 @@
 } */
 
 body {
-  background: url("../static/Images/nhl-bg2.jpg");
-  background-color: black;
+  /* background: url("../static/Images/nhl-bg2.jpg"); */
+  background-color: #ECECEC;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   margin-top: 50px;
@@ -62,3 +62,21 @@ body {
   margin: auto;
 } */
 
+.navbar-brand l{
+  color: black;
+  font-size: 50px;
+  font-family: nhlFont;
+}
+
+/* .navbar-brand {
+  background-color: white;
+} */
+
+.navbar {
+  background-color: silver;
+}
+
+.a #nav-item dropdown {
+  font-family: "Sintony",Arial,sans-serif;
+
+}
