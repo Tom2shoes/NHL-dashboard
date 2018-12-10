@@ -32,17 +32,3 @@ for team in team_ids:
     query_url = f"https://statsapi.web.nhl.com/api/v1/teams/{team}/stats"
     team_stats = requests.get(query_url).json()
     collection.insert(team_stats)
-
-# Unparsed DataFrame of nested team stats
-nested_stats = pd.DataFrame(list(collection.find({})))
-
-pre_df_list = []
-
-for i in range(len(team_ids)):
-    # Reaches into nested team stats to pull relevant info & append to 
-    pre_df_list.append((nested_stats.stats[i][1]['splits'][0]))
-
-# clean & workable parent dataframe 
-stats_df = json_normalize(pre_df_list)
-stats_df.iloc[:,:28] = stats_df.iloc[:,:28].replace('\w\w$', '', regex=True)
-rank_df = stats_df
