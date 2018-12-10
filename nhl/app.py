@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
 import pandas as pd
 import json
-from .stats_pull_store import *
+from stats_pull_store import *
 
 # Remote
 #from .stats_pull_store import *
