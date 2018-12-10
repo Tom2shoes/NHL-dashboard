@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
 import pandas as pd
 import json
-from stats_pull_store import *
+from .stats_pull_store import *
 
 # Remote
 #from .stats_pull_store import *
@@ -41,7 +41,11 @@ def test():
             }
 
     return jsonify(df_to_json)
-    
+
+@app.route("/selectTeam")
+def selectTeam():
+    return render_template("dropdownLinks.html", teamsList = rank_df['team.name'].values.tolist())
+
 @app.route("/latestgame/<team>")
 def away_page(team):
     
@@ -76,8 +80,9 @@ def away_page(team):
 
     if game_data["Home Shots"] == 0:
         return ("Game not yet played")
+    else:
+        return render_template("gametable.html", team = team, game_data=game_data)
 
-    return jsonify(game_data)
 
 
 @app.route("/home/<team>")
