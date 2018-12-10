@@ -71,7 +71,8 @@ d3.json("/test").then(function(d) {
         title: {
           display: true,
           text: 'NHL Team Statistics',
-          fontColor: 'white'
+          fontColor: 'white',
+          fontSize: 24
         },
 
         scale: {
@@ -80,16 +81,20 @@ d3.json("/test").then(function(d) {
             beginAtZero: false,
             suggestedMin: 1,
             suggestedMax: 31,
-            stepSize: 4
+            stepSize: 4,
+            fontColor: '#E9C19A',
+            backdropColor: 'rgba(0, 0, 0, 0)',
+            fontSize: 14
             },
           pointLabels: {
-            fontColor: 'white'
+            fontColor: '#E9C19A',
+            fontSize: 14
             },
           angleLines: {
-            color: 'white'
+            color: '#E9C19A'
             },
           gridLines: {
-            color: 'white'
+            color: '#E9C19A'
             },
           }
         }  
