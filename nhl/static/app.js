@@ -63,7 +63,7 @@ d3.json("/test").then(function(d) {
         legend: {
           position: 'top',
           labels: {
-            fontColor: 'white',
+            fontColor: 'black',
             fontSize: 14
           }
         },
@@ -71,7 +71,7 @@ d3.json("/test").then(function(d) {
         title: {
           display: true,
           text: 'NHL Team Statistics',
-          fontColor: 'white',
+          fontColor: 'black',
           fontSize: 24
         },
 
@@ -99,3 +99,5 @@ d3.json("/test").then(function(d) {
           }
         }  
       }));
+
+Chart.defaults.global.fontFamily = "'Sintony', 'Arial', sans-serif";

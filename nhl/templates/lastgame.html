@@ -33,41 +33,28 @@
     <div class="container-fluid" style="margin-top:10px;">
     <nav class="navbar navbar-expand-sm navbar-default">
         <a class="navbar-brand col-sm-6 col-md-8">
-            <l style="font-size: 50px" href="index.html">0</l>
-            <l href="index.html">NHL</l>
+            <l style="font-size: 50px">0</l>
+            <l>NHL</l>
             <l style="font-size: 30px">.COM</l>
         </a>
         <div class="nav-item dropdown col-md-4">
-            <div class="row">
-                <a class="nav-link" href="radar.html">Team Stats</a>
-            <div class="nav-item">
-                <a class="nav-link" href="twitter.html">Twitter Sentiments</a>
-            </div>
-            <div class="nav-item">
-                <a class="nav-link" href="lastgame.html">Last Game Stats</a>
+                <div class="row"> 
+                    <a class="nav-link" href="radar.html">Team Stats</a>
+                <div class="nav-item">
+                    <a class="nav-link" href="twitter.html">Twitter Sentiments</a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="lastgame.html">Last Game Stats</a>
             </div>
         </div>
     </nav>
 </div>
         
 <div class="container-fluid" style="margin-top:10px;"></div>
-    <div class="bg col-sm-12 col-md-12">
-        <br>
-        <br>
-        <b class="col-md-8" style="font-size:50px;">Welcome to the NHL Dashboard!</b>
-        <br>
-        <br>
-        <img class="col-sm-4 col-md-4" src="../static/Images/NHL-Logo.png" width="300px">
-        <br>
-        <div class="col-md-8">
-        This project was made for educational purposes using the NHL api.
-        <br>
-        This full stack was developed by: Sherry, Julie, Tommy, Josh in the data analytics.
-    </div>
-        <br>
-        <br>
-        <br>
-        <br>
+    <div class="bg col-md-10 offset-md-1">
+        <div id="svg-area">
+                <canvas class="chartjs-render-monitor" id="radar-chart" width="800" height="600"></canvas>
+            </div>
     </div>
 
     <!-- <div id="svg-area">
@@ -89,7 +76,5 @@
     
     
   </body>
-  <div class="footer" style="border-top-style:solid;border-color: white;">
-        This website is for educational purposes only. Please don't due.
-    </footer>
+
 </html>
