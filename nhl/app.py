@@ -1,22 +1,31 @@
 from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
 import pandas as pd
+from pandas.io.json import json_normalize
 import json
-from .stats_pull_store import *
 
 # Remote
-#from .stats_pull_store import *
 #from .NHL_Twitter_Sentiments import *
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://nhldashboard:password1@ds215370.mlab.com:15370/heroku_5gkg84qp"
 mongo = PyMongo(app)
 
 # # Local
-# from stats_pull_store import *
 # from NHL_Twitter_Sentiments import *
 # app = Flask(__name__)
 # app.config["MONGO_URI"] = "mongodb://localhost:27017/nhl-database"
 # mongo = PyMongo(app)
+
+rank_data = mongo.db.RANK.find({})
+mongo_df = pd.DataFrame(list(rank_data))
+
+pre_df_list = []
+for i in range(31):
+    pre_df_list.append((mongo_df.stats[i][1]['splits'][0]))
+
+stats_df = json_normalize(pre_df_list)
+stats_df.iloc[:,:28] = stats_df.iloc[:,:28].replace('\w\w$', '', regex=True)
+rank_df = stats_df
 
 @app.route("/")
 def landing_page():
@@ -24,7 +33,7 @@ def landing_page():
 
 @app.route("/test")
 def test():
-    
+
     rank_df['stat.pts'] = pd.to_numeric(rank_df['stat.pts'])
     rank_df['stat.faceOffWinPercentage'] = pd.to_numeric(rank_df['stat.faceOffWinPercentage'])
     rank_df['stat.goalsPerGame'] = pd.to_numeric(rank_df['stat.goalsPerGame'])
