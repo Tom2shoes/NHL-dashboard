@@ -29,9 +29,9 @@ rank_df = stats_df
 
 @app.route("/")
 def landing_page():
-    return render_template("index.html")
+    return render_template("index.html", teamsList = rank_df['team.name'].values.tolist())
 
-@app.route("/test")
+@app.route("/test") 
 def test():
 
     rank_df['stat.pts'] = pd.to_numeric(rank_df['stat.pts'])
@@ -50,6 +50,10 @@ def test():
             }
 
     return jsonify(df_to_json)
+
+@app.route("/teamstats")
+def team_stats():
+    return render_template("radar.html", teamsList = rank_df['team.name'].values.tolist())
 
 @app.route("/selectTeam")
 def selectTeam():
@@ -111,10 +115,39 @@ def home_page(team):
         })
     return jsonify(home_data)
 
-@app.route('/twitter')
+
+@app.route("/twitter/all")
 def twitter():
-    TWITTER = mongo.db.TWITTER.find_one()
-    #return render_template('index.html')
+    twitter_data = []
+
+    data = mongo.db.TWITTER.find({}, {'_id': False})
+
+    # for sentiment in data:
+    #   twitter_data.append({
+    #        "Compound": sentiment["average_compound_score"],
+    #        "Positive": sentiment["average_positive_score"],
+    #        "Neutral": sentiment["average_neutral_score"],
+    #        "Negative": sentiment["average_negative_score"]
+    #    })
+
+    data = mongo.db.TWITTER.find({}, {'_id': False})
+    for sentiment in data:
+        twitter_data.append({
+            "hockey_team": sentiment["hockey_team"],
+            "team_counter": sentiment["team_counter"],
+            "neutral": sentiment["neutral"],
+            "positive": sentiment["positive"],
+            "created_at": sentiment["created_at"],
+            "negative": sentiment["negative"],
+            "text": sentiment["text"],
+            "compound": sentiment["compound"]
+        })
+
+    return jsonify(twitter_data)
+
+@app.route("/twitter")
+def sentiment():
+    return render_template("twitter.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

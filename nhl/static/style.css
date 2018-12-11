@@ -1,6 +1,6 @@
 @font-face {
   font-family: nhlFont;
-  src: url("../static/NHL.ttf");
+  src: url("/static/NHL.ttf");
 }
 
 .panel-title {
@@ -25,15 +25,11 @@
 
 body {
   background: url("../static/Images/nhl-bg2.jpg");
-  /* background-color: rgb(55, 56, 59); */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   font-family: "Sintony", Arial, sans-serif;
 }
 
-/* .svg-container {
-  opacity: 0.95;
-} */
 
 #svg-area {
   height: 600px;
@@ -47,17 +43,9 @@ body {
   font-family: nhlFont;
 }
 
-/* .navbar-brand {
-  background-color: white;
-} */
-
 .navbar {
   background-color: rgb(210, 210, 210);
 }
-
-/* .nav-link {
-  font-family: "Sintony", Arial, sans-serif;
-} */
 
 #radar-chart {
   background-color: whitesmoke;
@@ -69,8 +57,17 @@ body {
   font-size: 20px;
 }
 
+.footer {
+  background-color: black;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
 
-
+/* 
 @media (max-width: 480px) {
   .nav-link {
     font-size: 14px;
@@ -104,14 +101,5 @@ body {
 
 @media (max-width: 1200px) {
 
-}
+} */
 
-.footer {
-  background-color: black;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: white;
-  text-align: center;
-}
