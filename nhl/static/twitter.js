@@ -283,7 +283,7 @@ d3.json(`/twitter/all`).then((nhlData) => {
     .text(d => d.hockey_team)
     .attr("x", d => xLinearScale(d[chosenXAxis]))
     .attr("y", d => yLinearScale(d[chosenYAxis]))
-    .attr("fill", "white")
+    .attr("fill", "black")
     .attr("font-size", 8)
     .attr("class", "text");
  

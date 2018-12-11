@@ -51,20 +51,3 @@
   background: rgba(0, 0, 0, 0.8);
   border-radius: 4px;
 }
-
-/* Mobile Rules */
-@media screen and (max-width: 530px) {
-  .stateText {
-    display: none;
-  }
-
-  .aText {
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .aText {
-    font-size: 13px;
-  }
-}

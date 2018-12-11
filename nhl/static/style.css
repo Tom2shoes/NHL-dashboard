@@ -32,8 +32,8 @@ body {
 
 
 #svg-area {
-  height: 600px;
-  width: 600px;
+  height: 100%;
+  width: 1000px;
   margin: auto;
 }
 
@@ -45,6 +45,7 @@ body {
 
 .navbar {
   background-color: rgb(210, 210, 210);
+  width: 100%;
 }
 
 #radar-chart {
